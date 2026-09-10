@@ -39,6 +39,7 @@ func tarjeta(
        @State esfav: Bool = false,
        @State esreserv: Bool = true,
         @State  testo: String = "Reservar",
+        @State icon1: String = "heart",
         @State  icon2: String = "house"
         
        )             -> some View {
@@ -59,16 +60,13 @@ func tarjeta(
                                 Spacer(minLength: 10)
                                 HStack(alignment: .top){
                                     
-                                    Image(systemName: "heart").onTapGesture {
-                                        if esreserv == true {
-                                            icon2 = "xmark"
-                                            testo = "Cancelar"
-                                           esreserv = false
+                                    Image(systemName: "\(icon1)").onTapGesture {
+                                        if esfav == true {
+                                            icon1 = "heart.fill"
+                                           esfav = false
                                         }else{
-                                            
-                                            testo = "Reservar"
-                                            icon2 = "house"
-                                            esreserv = true
+                                            icon1 = "heart"
+                                            esfav = true
                                         }
                                     }
                                 }.padding().background(Color.black).opacity(0.5).clipShape(Capsule()).foregroundStyle(Color.white)
@@ -80,12 +78,8 @@ func tarjeta(
                                             if esreserv == true {
                                                 icon2 = "xmark"
                                                 testo = "Cancelar"
-                                                HStack(alignment: .center){
-                                                    Text("Reservado")
-                                                }.frame(width: 400,height: 200).background(Color.gray).opacity(0.5)
                                                esreserv = false
                                             }else{
-                                                
                                                 testo = "Reservar"
                                                 icon2 = "house"
                                                 esreserv = true
@@ -96,7 +90,7 @@ func tarjeta(
                                         Text("\(testo)")
                                     }.padding(.horizontal).background(Color.reserva).clipShape(Capsule())
                                     
-                                
+                                    
                                }.padding(25)
                         }.foregroundStyle(Color.white)
                        )
@@ -119,6 +113,6 @@ func tarjeta(
                    }.padding()
                }.frame(width: 400,height: 400)
               
-           }
+           }.ignoresSafeArea()
         
         }
